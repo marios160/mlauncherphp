@@ -21,4 +21,16 @@ if(empty($conn->error)){
 } else {
     echo $conn->error;
 }
+$sql = "SELECT * FROM user WHERE email LIKE '$email' AND password LIKE '$pass'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $id = $row['id'];
+    $nick = $row['nick'];
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $sql = "INSERT INTO ipUsers (id_user, ip, date, nick) "
+            . "VALUES ('$id', '$ip', '" . date("Y-m-d H:i:s") . "','$nick' );";
+    $result = $conn->query($sql);
+
+}
     

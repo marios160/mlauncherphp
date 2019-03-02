@@ -18,9 +18,10 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
     $id = $row['id'];
+    $nick = $row['nick'];
     $ip = $_SERVER['REMOTE_ADDR'];
-    $sql = "INSERT INTO ipUsers (id_user, ip, date) "
-            . "VALUES ('$id', '$ip', '" . date("Y-m-d H:i:s") . "');";
+    $sql = "INSERT INTO ipUsers (id_user, ip, date, nick) "
+            . "VALUES ('$id', '$ip', '" . date("Y-m-d H:i:s") . "','$nick' );";
     $result = $conn->query($sql);
     
     $sql = "UPDATE user SET status='2', ip='$ip' WHERE email LIKE '$email' AND password LIKE '$pass'";
